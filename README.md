@@ -1,5 +1,6 @@
 # Foothill-App
 Foothill Website App
+
 Created by Berkeley Erwin and Adam Asher
 
 To be implemented
