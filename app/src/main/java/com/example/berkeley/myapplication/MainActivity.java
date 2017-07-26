@@ -7,10 +7,12 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -96,6 +98,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         mNavItems.add(new NavItem("Home", "Meetup destination", R.drawable.ic_action_home));
         mNavItems.add(new NavItem("Preferences", "Change your preferences", R.drawable.ic_action_settings));
@@ -110,14 +113,26 @@ public class MainActivity extends AppCompatActivity {
         DrawerListAdapter adapter = new DrawerListAdapter(this, mNavItems);
         mDrawerList.setAdapter(adapter);
 
-        // Drawer Item click listeners
-        mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.drawer_open, R.string.drawer_close) {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                selectItemFromDrawer(position);
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+
+                invalidateOptionsMenu();
             }
-        });
+
+            @Override
+            public void onDrawerClosed(View drawerView) {
+                super.onDrawerClosed(drawerView);
+                Log.d(TAG, "onDrawerClosed" + getTitle());
+
+                invalidateOptionsMenu();
+            }
+        };
+
+        mDrawerLayout.setDrawerListener(mDrawerToggle);
     }
+
     /*
 * Called when a particular item from the navigation drawer
 * is selected.
@@ -135,7 +150,37 @@ public class MainActivity extends AppCompatActivity {
 
         // Close the drawer
         mDrawerLayout.closeDrawer(mDrawerPane);
+        setTitle(mNavItems.get(position).mTitle);
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Pass the event to ActionBarDrawerToggle
+        // If it returns true, then it has handled
+        // the nav drawer indicator touch event
+        if (mDrawerToggle.onOptionsItemSelected(item)) {
+            return true;
+        }
+
+        // Handle your other action bar items...
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        mDrawerToggle.syncState();
+    }
+
+    // Called when invalidateOptionsMenu() is invoked
+
+   // public boolean onPrepareOptionsMenu(Menu menu) {
+        // If the nav drawer is open, hide action items related to the content view
+   //     boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerList);
+   //     menu.findItem(R.id.action_search).setVisible(!drawerOpen);
+   //     return super.onPrepareOptionsMenu(menu);
+   // }
 }
 
 
