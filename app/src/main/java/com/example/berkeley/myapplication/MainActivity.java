@@ -168,7 +168,7 @@ public class MainActivity extends AppCompatActivity{
         if(fragment != null) {
             FragmentManager fragmentManager = getFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.mainContent, fragment).commit();
-        }
+        } 
 
         mDrawerList.setItemChecked(position, true);
         setTitle(mNavItems.get(position).mTitle);
