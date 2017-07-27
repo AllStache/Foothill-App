@@ -103,7 +103,7 @@ public class MainActivity extends AppCompatActivity{
         setContentView(R.layout.activity_main);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        mNavItems.add(new NavItem("Home", "Meetup destination", R.drawable.ic_action_home));
+        mNavItems.add(new NavItem("Home", "Meet up destination", R.drawable.ic_action_home));
         mNavItems.add(new NavItem("Preferences", "Change your preferences", R.drawable.ic_action_settings));
         mNavItems.add(new NavItem("About", "Get to know about us", R.drawable.ic_action_about));
 
@@ -151,12 +151,24 @@ public class MainActivity extends AppCompatActivity{
     private void selectItemFromDrawer(int position) {
         //Intent intent = new Intent(this, TeacherActivity.class);
         //startActivity(intent);
-        Fragment fragment = new PreferencesFragment();
+        Fragment fragment = null;
 
-        FragmentManager fragmentManager = getFragmentManager();
-        fragmentManager.beginTransaction()
-               .replace(R.id.mainContent, fragment)
-                .commit();
+        switch (position) {
+            case 0: //First item
+                fragment = new HomeFragment();
+                break;
+            case 1: //Second item
+                fragment = new PreferencesFragment();
+                break;
+            case 2: //Third item
+                fragment = new AboutFragment();
+                break;
+        }
+
+        if(fragment != null) {
+            FragmentManager fragmentManager = getFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.mainContent, fragment).commit();
+        }
 
         mDrawerList.setItemChecked(position, true);
         setTitle(mNavItems.get(position).mTitle);

@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Foothill High School App</string>
-    <string name="hello_blank_fragment">Hello</string>
+    <string name="preferences_blank_fragment">Hello</string>
+    <string name="home_blank_fragment">Hiya</string>
+    <string name="about_blank_fragment">What</string>
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Close</string>
     <string name="search">Search</string>
