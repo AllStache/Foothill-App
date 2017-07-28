@@ -16,3 +16,7 @@ To be implemented
 -Google Classroom
 
 -Haiku (maybe)
+
+-FTV
+
+-Twitter (FHS ASB and lizard man)
