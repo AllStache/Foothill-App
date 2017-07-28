@@ -3,13 +3,16 @@
 
 To be implemented
 
--Calender including upcoming holidays
+-Calender including upcoming holidays also editable
 
--Input classes and times they begin/end
+-Input classes and times they begin/end     Record personal notes/homework for each class
 
 -View staff database
 
 -Bell Schedule
 
--Record personal notes/homework for each class
+-Aeries
 
+-Google Classroom
+
+-Haiku (maybe)
